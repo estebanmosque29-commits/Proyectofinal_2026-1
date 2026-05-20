@@ -1,0 +1,32 @@
+# Proyecto Final de Programación
+
+## Descripción
+Este proyecto corresponde al desarrollo de un sistema interactivo basado en entidades digitales, inteligencia artificial y gestión de niveles. El sistema incluirá mecánicas de movimiento, interacción entre objetos y control de comportamiento mediante clases especializadas.
+
+## Objetivo
+Implementar una arquitectura orientada a objetos utilizando C++ y aplicar conceptos como:
+
+- Herencia
+- Polimorfismo
+- Encapsulamiento
+- Gestión de memoria
+- Relaciones entre clases
+- Estructuras dinámicas
+
+## Clases principales
+
+### EntidadDigital
+Clase base encargada de representar las entidades generales del sistema.
+
+### Jugador
+Representa al usuario principal y sus habilidades especiales.
+
+### AgenteInteligente
+Implementa comportamientos automáticos e inteligencia artificial.
+
+### Pelota
+Gestiona físicas básicas, trayectoria y colisiones.
+
+### GestorNivel
+Administra niveles, entidades y el flujo principal del sistema.
+
