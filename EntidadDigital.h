@@ -29,3 +29,22 @@ class AgenteInteligente : public EntidadDigital {
 };
 
 #endif
+
+
+#ifndef PELOTA_H
+#define PELOTA_H
+
+class Pelota {
+
+};
+
+#endif
+
+#ifndef GESTORNIVEL_H
+#define GESTORNIVEL_H
+
+class GestorNivel {
+
+};
+
+#endif
