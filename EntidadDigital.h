@@ -3,6 +3,16 @@
 
 class EntidadDigital {
 
+protected:
+    float velocidadBase;
+    bool esActiva;
+
+public:
+    EntidadDigital();
+
+    void mover();
+    void actualizar(float dt);
+    virtual void colisionar();
 };
 
 #endif
