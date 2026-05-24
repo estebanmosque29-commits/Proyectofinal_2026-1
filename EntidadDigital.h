@@ -18,3 +18,14 @@ class Jugador : public EntidadDigital {
 };
 
 #endif
+
+#ifndef AGENTEINTELIGENTE_H
+#define AGENTEINTELIGENTE_H
+
+#include "EntidadDigital.h"
+
+class AgenteInteligente : public EntidadDigital {
+
+};
+
+#endif
