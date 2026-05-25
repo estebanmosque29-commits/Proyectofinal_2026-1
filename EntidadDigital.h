@@ -25,6 +25,15 @@ public:
 
 class Jugador : public EntidadDigital {
 
+private:
+    bool inestable;
+    int tiempoManipulacion;
+
+public:
+    Jugador();
+
+    void activarHabilidad();
+    void manejarInterferencias();
 };
 
 #endif
@@ -34,8 +43,18 @@ class Jugador : public EntidadDigital {
 
 #include "EntidadDigital.h"
 
+class Pelota;
+
 class AgenteInteligente : public EntidadDigital {
 
+private:
+    float tiempoReaccion;
+
+public:
+    AgenteInteligente();
+
+    void predecirTrayectoria(Pelota* p);
+    void adaptarDificultad(int nivelJugador);
 };
 
 #endif
