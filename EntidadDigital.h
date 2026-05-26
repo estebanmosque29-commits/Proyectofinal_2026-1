@@ -65,6 +65,15 @@ public:
 
 class Pelota {
 
+private:
+    float aceleracion;
+    bool enJuego;
+
+public:
+    Pelota();
+
+    void incrementarVelocidad();
+    void resetearPosicion();
 };
 
 #endif
