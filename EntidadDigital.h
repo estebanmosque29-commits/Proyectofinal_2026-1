@@ -83,6 +83,15 @@ public:
 
 class GestorNivel {
 
+private:
+    int nivelActual;
+    bool modoBoss;
+
+public:
+    GestorNivel();
+
+    void cargarNivel(int id);
+    void activarEventoEspecial();
 };
 
 #endif
