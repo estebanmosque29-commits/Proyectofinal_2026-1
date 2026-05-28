@@ -1,11 +1,3 @@
-// main.cpp
-#include <QApplication>
-#include "mainwindow.h"
-
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
-}
+// src/EntidadDigital.cpp
+#include "EntidadDigital.h"
+// Abstract base – no extra implementation needed.
