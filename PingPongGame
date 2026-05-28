@@ -1,0 +1,48 @@
+CMakeLists.txt:
+
+cmake_minimum_required(VERSION 3.14)
+project(PingPongGame LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Widgets Multimedia)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+set(SRC_FILES
+    main.cpp
+    mainwindow.cpp
+    src/EntidadDigital.cpp
+    src/Jugador.cpp
+    src/AgenteInteligente.cpp
+    src/Pelota.cpp
+    src/GestorNivel.cpp
+    src/AudioEngine.cpp
+    resources/resources.qrc
+)
+
+add_executable(${PROJECT_NAME} WIN32 ${SRC_FILES})
+
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    Qt6::Widgets
+    Qt6::Multimedia
+)
+
+main.cpp:
+
+// main.cpp
+#include <QApplication>
+#include "mainwindow.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
+}
