@@ -1,21 +1,28 @@
-#ifndef ENTIDADDIGITAL_H
-#define ENTIDADDIGITAL_H
+// src/EntidadDigital.h
+#pragma once
+#include <QPointF>
+#include <QSizeF>
+#include <QPainter>
 
 class EntidadDigital {
+public:
+    EntidadDigital(QPointF pos, QSizeF size)
+        : m_pos(pos), m_size(size) {}
+    virtual ~EntidadDigital() = default;
+
+    virtual void update(double dt) = 0;
+    virtual void draw(QPainter *painter) const = 0;
+
+    QPointF pos() const { return m_pos; }
+    QSizeF  size() const { return m_size; }
+
+    void setPos(QPointF p) { m_pos = p; }
 
 protected:
-    float velocidadBase;
-    bool esActiva;
-
-public:
-    EntidadDigital();
-
-    void mover();
-    void actualizar(float dt);
-    virtual void colisionar();
+    QPointF m_pos;
+    QSizeF  m_size;
 };
 
-#endif
 
 
 #ifndef JUGADOR_H
