@@ -117,20 +117,4 @@ private:
     QPixmap m_pix;
 };
 
-#ifndef GESTORNIVEL_H
-#define GESTORNIVEL_H
 
-class GestorNivel {
-
-private:
-    int nivelActual;
-    bool modoBoss;
-
-public:
-    GestorNivel();
-
-    void cargarNivel(int id);
-    void activarEventoEspecial();
-};
-
-#endif
