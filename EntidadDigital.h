@@ -118,3 +118,70 @@ private:
 };
 
 
+// src/GestorNivel.h
+#pragma once
+#include "Jugador.h"
+#include "AgenteInteligente.h"
+#include "Pelota.h"
+#include <memory>
+#include <QPainter>
+#include <QFont>
+
+class GestorNivel {
+public:
+    static constexpr double SCENE_W = 900.0;
+    static constexpr double SCENE_H = 600.0;
+
+    GestorNivel();
+    ~GestorNivel() = default;
+
+    void loadLevel(int level);    // 1 = side-view, 2 = top-down
+    void update(double dt);
+    void draw(QPainter *painter) const;
+    void reset();
+
+    // Input forwarding
+    void keyPress(int key);
+    void keyRelease(int key);
+
+    int  currentLevel() const { return m_level; }
+    int  scorePlayer()  const { return m_scorePlayer; }
+    int  scoreAI()      const { return m_scoreAI; }
+    bool isRunning()    const { return m_running; }
+
+    // Audio signal helpers (checked & cleared each frame)
+    bool popBounceEvent()  { bool v = m_evBounce; m_evBounce = false; return v; }
+    bool popGlitchEvent()  { bool v = m_evGlitch; m_evGlitch = false; return v; }
+    bool popScoreEvent()   { bool v = m_evScore;  m_evScore  = false; return v; }
+
+private:
+    int    m_level        = 1;
+    int    m_scorePlayer  = 0;
+    int    m_scoreAI      = 0;
+    bool   m_running      = true;
+    bool   m_evBounce     = false;
+    bool   m_evGlitch     = false;
+    bool   m_evScore      = false;
+
+    double m_glitchTimer  = 0.0;  // Level 2: countdown to next glitch
+    double m_resetTimer   = -1.0; // countdown after scoring
+
+    std::unique_ptr<Jugador>           m_player;
+    std::unique_ptr<AgenteInteligente> m_ai;
+    std::unique_ptr<Pelota>            m_ball;
+
+    QPixmap m_bgLevel1;
+    QPixmap m_bgLevel2;
+    QPixmap m_bgLevel3;
+
+    // Level 3 moving center barrier
+    double m_barrierY     = 100.0;
+    double m_barrierSpeed = 180.0; // px/s
+    double m_barrierH     = 160.0;
+    double m_barrierW     = 16.0;
+
+    void checkCollisions();
+    void drawHUD(QPainter *painter) const;
+    void drawBackground(QPainter *painter) const;
+    void drawCourt(QPainter *painter) const;
+};
