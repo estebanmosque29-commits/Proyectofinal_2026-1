@@ -484,3 +484,70 @@ void GestorNivel::draw(QPainter *painter) const
 
     drawHUD(painter);
 }
+
+
+// src/AudioEngine.cpp
+#include "AudioEngine.h"
+#include <QUrl>
+
+AudioEngine::AudioEngine()
+{
+    try {
+        // ── Sound effects ──────────────────────────────────────
+        m_sfxBounce = std::make_unique<QSoundEffect>();
+        m_sfxBounce->setSource(QUrl("qrc:/audio/bounce.wav"));
+        m_sfxBounce->setVolume(0.8f);
+
+        m_sfxGlitch = std::make_unique<QSoundEffect>();
+        m_sfxGlitch->setSource(QUrl("qrc:/audio/error.wav"));
+        m_sfxGlitch->setVolume(0.7f);
+
+        m_sfxScore = std::make_unique<QSoundEffect>();
+        m_sfxScore->setSource(QUrl("qrc:/audio/score.wav"));
+        m_sfxScore->setVolume(1.0f);
+
+        // ── Background music ───────────────────────────────────
+        m_audioOut = std::make_unique<QAudioOutput>();
+        m_audioOut->setVolume(0.4f);
+        m_music    = std::make_unique<QMediaPlayer>();
+        m_music->setAudioOutput(m_audioOut.get());
+        m_music->setLoops(QMediaPlayer::Infinite);
+
+    } catch (const std::bad_alloc &e) {
+        throw std::runtime_error(std::string("AudioEngine init failed: ") + e.what());
+    }
+}
+
+void AudioEngine::playBounce()
+{
+    if (m_sfxBounce && m_sfxBounce->isLoaded())
+        m_sfxBounce->play();
+}
+
+void AudioEngine::playGlitch()
+{
+    if (m_sfxGlitch && m_sfxGlitch->isLoaded())
+        m_sfxGlitch->play();
+}
+
+void AudioEngine::playScore()
+{
+    if (m_sfxScore && m_sfxScore->isLoaded())
+        m_sfxScore->play();
+}
+
+void AudioEngine::playMusic(int level)
+{
+    if (!m_music) return;
+    QString track;
+    if (level == 1) track = "qrc:/audio/bg_music_level1.mp3";
+    else if (level == 2) track = "qrc:/audio/bg_music_level2.mp3";
+    else track = "qrc:/audio/bg_music_level3.mp3";
+    m_music->setSource(QUrl(track));
+    m_music->play();
+}
+
+void AudioEngine::stopMusic()
+{
+    if (m_music) m_music->stop();
+}
