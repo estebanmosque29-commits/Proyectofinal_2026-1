@@ -185,3 +185,31 @@ private:
     void drawBackground(QPainter *painter) const;
     void drawCourt(QPainter *painter) const;
 };
+
+
+// src/AudioEngine.h
+#pragma once
+#include <QSoundEffect>
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <memory>
+#include <stdexcept>
+
+class AudioEngine {
+public:
+    AudioEngine();
+    ~AudioEngine() = default;
+
+    void playBounce();
+    void playGlitch();
+    void playScore();
+    void playMusic(int level);
+    void stopMusic();
+
+private:
+    std::unique_ptr<QSoundEffect>  m_sfxBounce;
+    std::unique_ptr<QSoundEffect>  m_sfxGlitch;
+    std::unique_ptr<QSoundEffect>  m_sfxScore;
+    std::unique_ptr<QMediaPlayer>  m_music;
+    std::unique_ptr<QAudioOutput>  m_audioOut;
+};
